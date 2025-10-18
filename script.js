@@ -12,25 +12,25 @@ const hoverHint = document.getElementById('hover-hint');
 
 // Load images from directory
 async function loadImages() {
-    try {
-        const response = await fetch('/api/images');
-        images = await response.json();
+    // GitHub Pages compatible: hardcoded image list
+    // Update this list with your actual image filenames
+    const imageFilenames = [
+        '0be86b93-8e69-4855-8afe-261e43dd9ae8.jpg',
+        '315ee035-f56e-459d-9693-6c1aef4fd813.jpg',
+        '4f1f605b-d5db-4e3a-a14c-519ec1cc26d1.jpg',
+        '541965328_1191281079716326_5603222636066030120_n.jpg',
+        '552763438_1504641397496741_1051608001197439662_n.jpg',
+        '553353765_3422771624530428_5896904838621666528_n.jpg',
+        '553583706_1778437216370390_4036940968075145664_n.jpg',
+        '553643670_2566143633765789_5650850872996222218_n.jpg'
+    ];
 
-        if (images.length === 0) {
-            console.warn('No images found. Using placeholder count.');
-            images = Array(8).fill(null).map((_, i) => ({
-                path: `public/images/placeholder${i + 1}.jpg`,
-                name: `Image ${i + 1}`
-            }));
-        }
-    } catch (error) {
-        console.error('Error loading images:', error);
-        // Fallback: create 8 placeholder images
-        images = Array(8).fill(null).map((_, i) => ({
-            path: `public/images/placeholder${i + 1}.jpg`,
-            name: `Image ${i + 1}`
-        }));
-    }
+    images = imageFilenames.map(filename => ({
+        path: `public/images/${filename}`,
+        name: filename
+    }));
+
+    console.log('Loaded', images.length, 'images for GitHub Pages');
 }
 
 // Chest click handler
