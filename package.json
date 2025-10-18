@@ -1,0 +1,20 @@
+{
+  "name": "birthday-surprise",
+  "version": "1.0.0",
+  "description": "An interactive birthday surprise with animated treasure chest and glass rose shards",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "birthday",
+    "animation",
+    "interactive"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Birthday Surprise</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-particles"></div>
+
+    <!-- Treasure Chest -->
+    <div id="chest-container">
+        <div id="chest" class="chest"></div>
+        <div class="chest-glow"></div>
+        <p class="chest-hint">Click the chest!</p>
+    </div>
+
+    <!-- Heart Container -->
+    <div id="heart-container" class="hidden">
+        <svg id="heart-svg" viewBox="50 50 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <!-- Heart pieces will be dynamically created -->
+        </svg>
+        <p id="hover-hint" class="hover-hint">Hover over each piece to reveal your memories...</p>
+    </div>
+
+    <!-- Birthday Message -->
+    <div id="birthday-message" class="hidden">
+        <h1 class="birthday-text">
+            <span class="letter">H</span>
+            <span class="letter">a</span>
+            <span class="letter">p</span>
+            <span class="letter">p</span>
+            <span class="letter">y</span>
+            <span class="letter space"> </span>
+            <span class="letter">B</span>
+            <span class="letter">i</span>
+            <span class="letter">r</span>
+            <span class="letter">t</span>
+            <span class="letter">h</span>
+            <span class="letter">d</span>
+            <span class="letter">a</span>
+            <span class="letter">y</span>
+            <span class="letter">!</span>
+        </h1>
+        <div class="confetti-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
