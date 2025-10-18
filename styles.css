@@ -71,6 +71,42 @@ body.petal-view {
     position: relative;
 }
 
+.person-image {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    max-width: 300px;
+    max-height: 400px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.3));
+    z-index: 10;
+    pointer-events: none;
+}
+
+.smile-image {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    max-width: 300px;
+    max-height: 400px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.3));
+    z-index: 10003;
+    pointer-events: none;
+    animation: fadeInSlide 1s ease-out;
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .chest {
     position: relative;
     width: 300px;
@@ -187,8 +223,32 @@ body.petal-view {
 }
 
 #center-heart {
-    pointer-events: none;
+    cursor: pointer;
+    pointer-events: auto;
     filter: drop-shadow(0 5px 20px rgba(255, 100, 100, 0.6));
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+#center-heart:hover {
+    filter: drop-shadow(0 0 40px rgba(255, 100, 100, 1))
+            drop-shadow(0 0 60px rgba(255, 50, 150, 0.8))
+            drop-shadow(0 0 80px rgba(255, 0, 100, 0.6));
+    transform: scale(1.1);
+}
+
+#center-heart.glowing {
+    animation: heartGlow 2s ease-in-out infinite;
+}
+
+@keyframes heartGlow {
+    0%, 100% {
+        filter: drop-shadow(0 5px 20px rgba(255, 100, 100, 0.6));
+    }
+    50% {
+        filter: drop-shadow(0 0 40px rgba(255, 100, 100, 1))
+                drop-shadow(0 0 60px rgba(255, 50, 150, 0.8))
+                drop-shadow(0 0 80px rgba(255, 0, 100, 0.6));
+    }
 }
 
 #center-heart image {

@@ -15,14 +15,31 @@ async function loadImages() {
     // GitHub Pages compatible: hardcoded image list
     // Update this list with your actual image filenames
     const imageFilenames = [
+        '0869faaa-08eb-421f-bf6d-d638079d0c1d.jpg',
         '0be86b93-8e69-4855-8afe-261e43dd9ae8.jpg',
+        '1f9579a3-d0e6-4989-9dd3-ebd1ea212937.jpg',
         '315ee035-f56e-459d-9693-6c1aef4fd813.jpg',
+        '39c640ab-16a4-4ccd-8b1e-c5b2c5e3d9f4.jpg',
         '4f1f605b-d5db-4e3a-a14c-519ec1cc26d1.jpg',
         '541965328_1191281079716326_5603222636066030120_n.jpg',
         '552763438_1504641397496741_1051608001197439662_n.jpg',
         '553353765_3422771624530428_5896904838621666528_n.jpg',
         '553583706_1778437216370390_4036940968075145664_n.jpg',
-        '553643670_2566143633765789_5650850872996222218_n.jpg'
+        '553643670_2566143633765789_5650850872996222218_n.jpg',
+        '554293276_24638174949143438_7677668324343913107_n.jpg',
+        '564255210_1472750683782448_4646107360022568104_n.jpg',
+        '5b0f6a57-757a-49b3-909a-ddb66db77f7a.jpg',
+        '61f50a70-07d2-4763-92cc-e85200055bd4.jpg',
+        '722993dc-a2d7-4242-a30a-ba35f789d137.jpg',
+        '9e36cc92-6660-4492-8d28-5e25aac13018.jpg',
+        'a2ae8a14-e4f8-4339-9cdc-932bd1b88d64.jpg',
+        'c2eee4ea-c7b9-448c-aa76-659e428a4ede.jpg',
+        'c673bee5-9714-4460-a30b-9da98a1111c8.jpg',
+        'd0638b01-6faf-42de-b1cf-d5633c11d55e.jpg',
+        'd4aa26ae-89d0-4404-9169-abe254aa853b.jpg',
+        'dcdb087b-a135-46c2-8346-f9f282a1db61.jpg',
+        'download (1).jpg',
+        'edb46579-fd1a-497a-8404-953212f92adf.jpg'
     ];
 
     images = imageFilenames.map(filename => ({
@@ -104,7 +121,58 @@ function createCenterHeart() {
     heart.style.transition = 'opacity 1s ease, transform 1s ease';
     heart.style.transformOrigin = 'center';
     heart.style.filter = 'drop-shadow(0 5px 20px rgba(255, 100, 100, 0.6))';
+
+    // Add click handler to enlarge heart
+    heart.style.cursor = 'pointer';
+    heart.addEventListener('click', enlargeHeart);
+
     heartSvg.appendChild(heart);
+}
+
+// Enlarge heart on click
+function enlargeHeart() {
+    const heart = document.getElementById('center-heart');
+    if (!heart) return;
+
+    // Create fullscreen overlay
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+    overlay.style.zIndex = '10000';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.5s ease';
+    overlay.style.cursor = 'pointer';
+
+    const fullImage = document.createElement('img');
+    fullImage.src = 'heart.png';
+    fullImage.style.maxWidth = '90%';
+    fullImage.style.maxHeight = '90%';
+    fullImage.style.objectFit = 'contain';
+    fullImage.style.filter = 'drop-shadow(0 0 50px rgba(255, 100, 100, 1)) drop-shadow(0 0 100px rgba(255, 50, 150, 0.8))';
+    fullImage.style.animation = 'heartGlow 2s ease-in-out infinite';
+
+    overlay.appendChild(fullImage);
+    document.body.appendChild(overlay);
+
+    // Fade in overlay
+    setTimeout(() => {
+        overlay.style.opacity = '1';
+    }, 10);
+
+    // Click anywhere to close
+    overlay.addEventListener('click', () => {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+            overlay.remove();
+        }, 500);
+    });
 }
 
 // Calculate positions for shards - simple circle to ensure all are visible
@@ -298,6 +366,11 @@ function updateHeartReveal() {
         centerHeart.style.opacity = revealPercentage / 100;
         const scale = 0.5 + (revealPercentage / 200);
         centerHeart.setAttribute('transform', `scale(${scale})`);
+
+        // Add glowing effect when heart is fully revealed
+        if (revealedCount === images.length) {
+            centerHeart.classList.add('glowing');
+        }
     }
 
     // Hide hint once user starts revealing
@@ -319,6 +392,12 @@ function playRevealSound() {
 function showBirthdayMessage() {
     // Show birthday text at the top
     birthdayMessage.classList.remove('hidden');
+
+    // Show smile image
+    const smileImage = document.getElementById('smile-image');
+    if (smileImage) {
+        smileImage.classList.remove('hidden');
+    }
 
     // Move heart container down to make room for text, but keep it centered
     heartContainer.style.top = '55%';
